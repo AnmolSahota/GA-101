@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 # Initialize the menu with some sample dishes
 menu = [
@@ -9,12 +10,15 @@ menu = [
     {"id": 3, "name": "Pasta", "price": 7.99, "availability": False}
 ]
 
+
 # Initialize the orders list
 orders = []
+
 
 # Route to display the menu
 @app.route('/menu')
 def display_menu():
+    
     return menu
 # Route to add a new dish to the menu
 @app.route('/add_dish', methods=['POST'])
@@ -104,6 +108,7 @@ def update_order_status(order_id):
 @app.route('/orders')
 def display_orders():
     return orders
+
 
 # Main entry point of the application
 if __name__ == '__main__':
